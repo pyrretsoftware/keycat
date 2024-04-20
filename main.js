@@ -1,8 +1,12 @@
-const { app, BrowserWindow, Menu, ipcMain } = require('electron')
+const { app, BrowserWindow, } = require('electron')
 const path = require('node:path')
 const fetch = require('node-fetch')
+const IPC = require('./Helpers/IPC.js')
+const AppDataHandler = require('./Helpers/AppdataHandler.js')
+const Installer = require('./Installer/InstallerWindow.js')
 
-const createWindow = () => {
+if (AppDataHandler.CheckInstall(__dirname)) {
+  const createWindow = () => {
     const win = new BrowserWindow({
       width: 1200,
       height: 800,
@@ -16,26 +20,21 @@ const createWindow = () => {
     win.loadURL('http://localhost:3000')
    // win.setMenuBarVisibility(null)
     //Menu.setApplicationMenu(null)
-
-    ipcMain.on('browser-login', async () => {
-      const exchangetokenreq = await fetch("https://auth.axell.me/authapi/getexchangetoken")
-      const exchangetoken = await exchangetokenreq.json()
-      console.log(exchangetoken)
-      var url = "https://auth.axell.me/github/welcome?exchangetoken=" + exchangetoken["ExchangeToken"];
-      var start = (process.platform == 'darwin'? 'open': process.platform == 'win32'? 'start': 'xdg-open');
-      require('child_process').exec(start + ' ' + url);
-      console.log("yes?")
-      currentexchangetoken = exchangetoken["ExchangeToken"]
-    })
-    
   }
   app.whenReady().then(() => {
-    ipcMain.handle('login:gettoken', async function() {
-      const response = await fetch("https://auth.axell.me/authapi/getusertoken?exchangetoken=" + currentexchangetoken)
-      const json = await response.json();
-      console.log(json);
-        return json
-    })
     createWindow()
-    
+    IPC.OnReady()
   })
+} else {
+  if (process.argv[2] == "portable") {
+    console.log("Firt launch: Initalizing as portable")
+    AppDataHandler.CreateInstall(__dirname, "Portable")
+    app.relaunch()
+    app.exit()
+  } else {
+    console.log("Firt launch: Initalizing as Installed")
+    app.whenReady().then(() => {
+      Installer.StartInstaller()
+    })
+  }
+}

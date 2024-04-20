@@ -7,12 +7,13 @@ module.exports = {
   },
   rebuildConfig: {},
   makers: [
+    /*
     {
       "name": "@rabbitholesyndrome/electron-forge-maker-portable",
       "config": {
         "appId": "me.axell.keycat"
       }
-    },
+    },*/
     {
       name: '@electron-forge/maker-zip'
     },

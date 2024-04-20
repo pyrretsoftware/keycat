@@ -1,4 +1,5 @@
-export default {
+module.exports =
+{
     "Type" : "Installed",
     "FullscreenOnStartup" : true,
     "DiscordRPCEnabled" : true,
