@@ -1,8 +1,74 @@
 body {
     background-color: rgb(31, 31, 31);
+    padding: 0;
+    margin: 0;
 }
 .top-bar {
     background-color: rgb(15, 15, 15);
     width: 100%;
-    height: 35px;
+    height: 65px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.logo-image {
+    margin: 15px;
+    align-self: stretch;
+}
+.installer-text {
+    color: white;
+}
+.installer-text-small {
+    color: white;
+    font-size: small;
+    text-indent: 10px;
+}
+.bottom-bar {
+    margin: 10px;
+}
+.bottom-bar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    width: 100%;
+ }
+.installation-button {
+    background-color: rgb(28, 28, 28);
+    color: white;
+    border-radius: 5px;
+    border-color: rgb(15, 15, 15);
+    box-shadow: 3px 3px 5px rgb(5, 5, 5);
+    -webkit-transform: scale(1.2); 
+    -ms-transform: scale(1.2); 
+    transform: scale(1.2);
+    margin-right: 10px;
+}
+.installation-button:hover {
+    background-color: rgb(28, 28, 28);
+    color: white;
+    border-radius: 5px;
+    border-color: rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px rgb(5, 5, 5);
+    -webkit-transform: scale(1.2); 
+    -ms-transform: scale(1.2); 
+    transform: scale(1.2);
+    margin-right: 10px;
+}
+h2 {
+    color: white;
+}
+h4 {
+    color: white;
+}
+.installer-content {
+    margin: 20px;
+}
+.bottom-installer-content {
+    margin: 20px;
+    position: absolute;
+    bottom: 42px;
+    white-space: nowrap;
 }

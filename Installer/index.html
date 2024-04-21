@@ -5,8 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keycat Client Installer</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="gfonts.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="top-bar"></div>
+    <div class="top-bar">
+        <img class="logo-image" src="../images/icon.png" alt="">
+        <div>
+            <p class="roboto-bold installer-text" style="margin-bottom: 0px;">Installation options</p>
+            <p class="roboto-light installer-text-small" style="margin-top: 4px;">Choose how and where you want to install keycat</p>
+        </div>
+    </div>
+    <div class="installer-content">
+            <h4 class="roboto-regular">Choose an installation location and where you want to install keycat from. You can leave these settings unless you know what your doing.</h4>
+    </div>
+    <div class="bottom-installer-content">
+        <div style="display: inline-block;">
+            <fieldset>
+                <legend class="installer-text roboto-regular">Choose an Installation Location:</legend>
+                <label class="installer-text roboto-regular" style="font-size: medium;" for="location">Install location: </label>
+                <input id="location" type="text">
+            </fieldset>
+            <fieldset style="margin-top: 10px; margin-bottom: 0px;">
+                <legend class="installer-text roboto-regular" >Choose Location to Download Keycat From:</legend>
+                <div>
+                    <input type="radio" name="wheretoget" id="github">
+                    <label class="installer-text roboto-regular" style="font-size: small;" for="github">GitHub Repository (Recommended)</label>
+    
+                </div>
+                <div>
+                    <input type="radio" name="wheretoget" id="axellcd">
+                    <label class="installer-text roboto-regular" style="font-size: small;" for="axellcd">AxellCD</label>
+                    
+                </div>
+                <div>
+                    <input type="radio" name="wheretoget" id="current">
+                    <label class="installer-text roboto-regular" style="font-size: small;" for="current">Extract from installation binary</label>
+                    
+                </div>
+            </fieldset>
+        </div>
+        <div id="githuboption" style="display: inline-block; ">
+            <fieldset>
+                <legend class="installer-text roboto-regular">GitHub Settings:</legend>
+                <label class="installer-text roboto-regular" for="release">Release: </label>
+                <select name="release" id="release"></select>
+            </fieldset>
+            <fieldset>
+                <legend  class="installer-text roboto-regular">Binary type:</legend>
+                <div>
+                    <input type="radio" name="binarytype" id="zip">
+                    <label class="installer-text roboto-regular" style="font-size: small;" for="zip">ZIP File (Recommended)</label>
+                    
+                </div>
+                <div>
+                    <input type="radio" name="binarytype" id="self">
+                    <label class="installer-text roboto-regular" style="font-size: small;" for="self">Self-Contained</label>
+                    
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="bottom-bar-container">
+        <div class="bottom-bar">
+            <button class="installation-button roboto-regular">Back</button>
+            <button class="installation-button roboto-regular" style="margin-right: 15px;">Continue</button>
+            <button class="installation-button roboto-regular">Cancel</button>
+        </div>
+    </div>
 </body>
+<script>
+    //least janky solution written by me be like
+    //document.getElementsByClassName("bottom-installer-content")[0].style["bottom"] = document.getElementsByClassName("bottom-bar-container")[0].getBoundingClientRect().height + "px"; 
+document.getElementById("github").addEventListener('input', function() {
+        document.getElementById("githuboption").style.visibility = "visible";
+    
+ });
+ document.getElementById("axellcd").addEventListener('input', function() {
+        document.getElementById("githuboption").style.visibility = "hidden";
+ });
+ document.getElementById("current").addEventListener('input', function() {
+        document.getElementById("githuboption").style.visibility = "hidden";
+ });
+</script>
 </html>

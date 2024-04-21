@@ -1,4 +1,4 @@
-const { app, BrowserWindow, } = require('electron')
+const { app, BrowserWindow, Menu} = require('electron')
 const path = require('node:path')
 const fetch = require('node-fetch')
 const IPC = require('./Helpers/IPC.js')
@@ -18,8 +18,8 @@ if (AppDataHandler.CheckInstall(__dirname)) {
       }
     })
     win.loadURL('http://localhost:3000')
-   // win.setMenuBarVisibility(null)
-    //Menu.setApplicationMenu(null)
+   win.setMenuBarVisibility(null)
+    Menu.setApplicationMenu(null)
   }
   app.whenReady().then(() => {
     createWindow()
