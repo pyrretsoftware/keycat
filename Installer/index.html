@@ -10,6 +10,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
+<script>
+    function cancel() {
+        if (confirm("Are you sure you want to exit the installer?")) {
+            window.electronAPI.Exit()
+        }
+    }
+</script>
 <body>
     <div class="top-bar">
         <img class="logo-image" src="../images/icon.png" alt="">
@@ -29,9 +36,9 @@
                 <input id="location" type="text">
             </fieldset>
             <fieldset style="margin-top: 10px; margin-bottom: 0px;">
-                <legend class="installer-text roboto-regular" >Choose Location to Download Keycat From:</legend>
+                <legend class="installer-text roboto-regular" >Choose Source to Download Keycat From:</legend>
                 <div>
-                    <input type="radio" name="wheretoget" id="github">
+                    <input checked type="radio" name="wheretoget" id="github">
                     <label class="installer-text roboto-regular" style="font-size: small;" for="github">GitHub Repository (Recommended)</label>
     
                 </div>
@@ -56,7 +63,7 @@
             <fieldset>
                 <legend  class="installer-text roboto-regular">Binary type:</legend>
                 <div>
-                    <input type="radio" name="binarytype" id="zip">
+                    <input checked type="radio" name="binarytype" id="zip">
                     <label class="installer-text roboto-regular" style="font-size: small;" for="zip">ZIP File (Recommended)</label>
                     
                 </div>
@@ -70,9 +77,9 @@
     </div>
     <div class="bottom-bar-container">
         <div class="bottom-bar">
-            <button class="installation-button roboto-regular">Back</button>
+            <button class="installation-button roboto-regular" style="visibility: hidden;">Back</button>
             <button class="installation-button roboto-regular" style="margin-right: 15px;">Continue</button>
-            <button class="installation-button roboto-regular">Cancel</button>
+            <button class="installation-button roboto-regular" onclick="cancel()" >Cancel</button>
         </div>
     </div>
 </body>
@@ -89,5 +96,20 @@ document.getElementById("github").addEventListener('input', function() {
  document.getElementById("current").addEventListener('input', function() {
         document.getElementById("githuboption").style.visibility = "hidden";
  });
+
+
+ async function fetchreleases() {
+          const releases = await fetch("https://api.github.com/repos/pyrretsoftware/keycat/releases")
+          const releasesjson = await releases.json()
+          releasesjson.forEach(release => {
+            console.log(release["name"]);
+            const newelement = document.createElement('option');
+            newelement.classList.add('roboto-regular');
+            newelement.classList.add('black-text');
+            newelement.innerHTML = release["name"];
+            document.getElementById('release').appendChild(newelement);
+          });
+        }
+        fetchreleases()
 </script>
 </html>

@@ -72,3 +72,6 @@ h4 {
     bottom: 42px;
     white-space: nowrap;
 }
+.black-text {
+    color: black;
+}
