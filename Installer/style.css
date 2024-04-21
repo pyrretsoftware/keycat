@@ -46,6 +46,17 @@ body {
     transform: scale(1.2);
     margin-right: 10px;
 }
+.installation-button:disabled {
+    background-color: rgb(77, 77, 77);
+    color: white;
+    border-radius: 5px;
+    border-color: rgb(15, 15, 15);
+    box-shadow: 3px 3px 5px rgb(5, 5, 5);
+    -webkit-transform: scale(1.2); 
+    -ms-transform: scale(1.2); 
+    transform: scale(1.2);
+    margin-right: 10px;
+}
 .installation-button:hover {
     background-color: rgb(28, 28, 28);
     color: white;
@@ -72,6 +83,28 @@ h4 {
     bottom: 42px;
     white-space: nowrap;
 }
+.bottom-installer-content-flex {
+    margin: 20px;
+    position: absolute;
+    bottom: 42px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: fill-available;
+
+}
 .black-text {
     color: black;
 }
+.logtextarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    resize: none;
+}
+textarea:disabled {
+    background: white;
+    color: black;
+  }

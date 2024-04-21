@@ -27,6 +27,7 @@
   "dependencies": {
     "easy-presence": "^1.2.0-oops1",
     "electron-squirrel-startup": "^1.0.0",
+    "extract-zip": "^2.0.1",
     "node-fetch": "^2.7.0",
     "unzipper": "^0.11.3"
   }

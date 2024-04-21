@@ -5,11 +5,10 @@ const { RegisterRPC } = require('../Helpers/IPC')
 
 const releasesapi = "https://api.github.com/repos/pyrretsoftware/keycat/releases"
 
-const installlocations = {
-  "win32" : 'C:/Program Files (x86)/',
-  "linux" : '/opt/'
-}
 const { ipcMain } = require('electron')
+const { DownloadRelease } = require('../Helpers/BinaryDownloader')
+
+
 
 async function StartInstaller() {
 let InstallOptions = {}
@@ -26,9 +25,11 @@ let CurrentInstallationStage = 0
       win.setResizable(true)
       win.loadFile("./Installer/index.html")
       win.webContents.on('did-finish-load', function() {
-        console.log("didfinishload fired")
-        console.log("recommended install location is " + installlocations[process.platform])
-        win.webContents.executeJavaScript(`document.getElementById("location").value = "${installlocations[process.platform]}"`);
+        if (CurrentInstallationStage == 0) {
+          console.log("didfinishload fired")
+          console.log("recommended install location is " + process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share"))
+          win.webContents.executeJavaScript(`document.getElementById("location").value = '${process.env.LOCALAPPDATA.replaceAll("\\", "/") || (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share")}'`);
+        }
 
       });
       console.log("registering rpc")
@@ -38,6 +39,7 @@ let CurrentInstallationStage = 0
 
       ipcMain.handle('installation:continue', async function() {
         if (CurrentInstallationStage == 0) {
+          CurrentInstallationStage = 1
           const location = await win.webContents.executeJavaScript(`document.getElementById("location").value`);
           const binarytype = await win.webContents.executeJavaScript(`document.querySelector('input[name="binarytype"]:checked').id`);
           const release = await win.webContents.executeJavaScript(`document.getElementById("release").options[document.getElementById("release").selectedIndex].text;`);
@@ -56,10 +58,20 @@ let CurrentInstallationStage = 0
           } else {
             InstallOptions["Source"] = "InstallBinary"
           }
-
+          win.loadFile("./Installer/installing.html")
+          win.webContents.on('did-finish-load', function() {
+            DownloadRelease(sendlog, InstallOptions, completeinstall)
+          })
         }
           return true
       })
 
+      function sendlog(log) {
+        win.webContents.send('send-log', log)
+        win.webContents.executeJavaScript("document.getElementById('progressbar').value += 12.5");
+      }
+      function completeinstall() {
+        win.webContents.executeJavaScript("alert('Installation Finished'); window.electronAPI.Exit();");
+      }
 }
 module.exports = {StartInstaller}

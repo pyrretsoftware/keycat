@@ -16,6 +16,9 @@
             window.electronAPI.Exit()
         }
     }
+    function install() {
+        window.electronAPI.Continue()
+    }
 </script>
 <body>
     <div class="top-bar">
@@ -48,8 +51,8 @@
                     
                 </div>
                 <div>
-                    <input type="radio" name="wheretoget" id="current">
-                    <label class="installer-text roboto-regular" style="font-size: small;" for="current">Extract from installation binary</label>
+                    <input style="display: none;" type="radio" name="wheretoget" id="current">
+                    <label style="display: none;" class="installer-text roboto-regular" style="font-size: small;" for="current">Extract from installation binary</label>
                     
                 </div>
             </fieldset>
@@ -60,7 +63,7 @@
                 <label class="installer-text roboto-regular" for="release">Release: </label>
                 <select name="releasetype" id="release"></select>
             </fieldset>
-            <fieldset>
+            <fieldset style="display: none;">
                 <legend  class="installer-text roboto-regular">Binary type:</legend>
                 <div>
                     <input checked type="radio" name="binarytype" id="zip">
@@ -78,7 +81,7 @@
     <div class="bottom-bar-container">
         <div class="bottom-bar">
             <button class="installation-button roboto-regular" style="visibility: hidden;">Back</button>
-            <button class="installation-button roboto-regular" style="margin-right: 15px;">Continue</button>
+            <button class="installation-button roboto-regular" onclick="install()" style="margin-right: 15px;">Install</button>
             <button class="installation-button roboto-regular" onclick="cancel()" >Cancel</button>
         </div>
     </div>

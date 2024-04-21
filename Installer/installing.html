@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keycat Client Installer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="gfonts.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<script>
+    function cancel() {
+        if (confirm("Are you sure you want to exit the installer?")) {
+            window.electronAPI.Exit()
+        }
+    }
+</script>
+<body>
+    <div class="top-bar">
+        <img class="logo-image" src="../images/icon.png" alt="">
+        <div>
+            <p class="roboto-bold installer-text" style="margin-bottom: 0px;">Installing...</p>
+            <p class="roboto-light installer-text-small" style="margin-top: 4px;">Keycat is currently installing.</p>
+        </div>
+    </div>
+    <div class="installer-content">
+            <h4 class="roboto-regular">Please wait for the installation to finish.</h4>
+    </div>
+    <div class="bottom-installer-content-flex">
+        <progress id="progressbar" style="width: 100%;" max="100" value="0" ></progress>
+        <textarea disabled style="width: 100%;" class="logtextarea" name="" id="" cols="30" rows="10"></textarea>
+    </div>
+    <div class="bottom-bar-container">
+        <div class="bottom-bar">
+            <button class="installation-button roboto-regular" style="visibility: hidden;">Back</button>
+            <button disabled class="installation-button roboto-regular" style="margin-right: 15px;">Install</button>
+            <button class="installation-button roboto-regular" onclick="cancel()" >Cancel</button>
+        </div>
+    </div>
+</body>
+<script>
+    window.electronAPI.onSendLog((message) => {
+        document.getElementsByClassName("logtextarea")[0].innerHTML = document.getElementsByClassName("logtextarea") + message
+    })
+</script>
+</html>
