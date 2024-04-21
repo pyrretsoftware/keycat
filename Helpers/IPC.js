@@ -10,10 +10,6 @@ ipcMain.on('browser-login', async () => {
   })
 
 
-function RegisterRPC(event, func) {
-  ipcMain.on(event, func)
-}
-
 module.exports = { OnReady() {
     ipcMain.handle('login:gettoken', async function() {
         const response = await fetch("https://auth.axell.me/authapi/getusertoken?exchangetoken=" + currentexchangetoken)
@@ -21,4 +17,4 @@ module.exports = { OnReady() {
         console.log(json);
           return json
       })
-}, RegisterRPC}
+}}
