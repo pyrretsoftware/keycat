@@ -50,7 +50,7 @@ let CurrentInstallationStage = 0
           } else {
             InstallOptions["BinaryType"] = "Self-Contained"
           }
-          InstallOptions["ReleaseName"] = release
+          InstallOptions["Release"] = release
           if (source == "github") {
             InstallOptions["Source"] = "GitHub"
           } else if (source == "axellcd") {

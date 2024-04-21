@@ -103,6 +103,10 @@ document.getElementById("github").addEventListener('input', function() {
 
  async function fetchreleases() {
           const releases = await fetch("https://api.github.com/repos/pyrretsoftware/keycat/releases")
+          if (releases.status == 403) {
+            alert("You have been ratelimited by GitHub. Please try again in a few minutes.")
+            cancel()
+          }
           const releasesjson = await releases.json()
           releasesjson.forEach(release => {
             console.log(release["name"]);

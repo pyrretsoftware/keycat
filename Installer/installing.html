@@ -42,7 +42,7 @@
 </body>
 <script>
     window.electronAPI.onSendLog((message) => {
-        document.getElementsByClassName("logtextarea")[0].innerHTML = document.getElementsByClassName("logtextarea") + message
+        document.getElementsByClassName("logtextarea")[0].innerHTML = document.getElementsByClassName("logtextarea")[0].innerHTML + message
     })
 </script>
 </html>
