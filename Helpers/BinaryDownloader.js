@@ -4,10 +4,11 @@ const http = require('https');
 const path = require('path');
 const extract = require('extract-zip');
 const { CreateInstall } = require('./AppdataHandler');
-
+const Downloader = require("nodejs-file-downloader");
 
 async function DownloadRelease(sendlog, options, completeinstall) {
     //Figure out platform
+    process.noAsar = true; 
     let PlatformInfo = {
         "Searchname" : "Unknown",
         "PrettyName" : "Unknown",
@@ -61,24 +62,26 @@ async function DownloadRelease(sendlog, options, completeinstall) {
                     throw new Error("FATAL: Binary types other than zip are not supported anymore due to performance and compatibility issues")
                 }
                 let loopbreak2 = true
-                release["assets"].forEach(releaseasset => {
+                release["assets"].forEach(async releaseasset =>  {
                     if (releaseasset["name"] == binaryname && loopbreak2) {
                         loopbreak2 = false
                         fs.mkdirSync(path.join(options["Location"], "Keycat"))
                         const zip = fs.createWriteStream(path.join(path.join(options["Location"], "Keycat"), "keycat.zip"));
                         sendlog("Created Keycat Directory.")
                         sendlog("Downloading Keycat.")
-                        const request = http.get(releaseasset["browser_download_url"], function(response) {
-                            response.pipe(zip);
-                            zip.on("finish", async () =>  {
-                                zip.close();
-                                await extract(path.join(path.join(options["Location"], "Keycat"), "keycat.zip"), { dir: path.join(options["Location"], "Keycat") })
-                                sendlog("Downloaded and unzipped keycat");
-                                CreateInstall(path.join(options["Location"], "Keycat"), "Installed")
-                                sendlog("Installation Successful.");
-                                completeinstall()
-                            });
-                        });
+                        console.log(releaseasset["browser_download_url"])
+                        const downloader = new Downloader({
+                            url: releaseasset["browser_download_url"], //If the file name already exists, a new file with the name 200MB1.zip is created.
+                            directory: path.join(options["Location"], "Keycat"), //This folder will be created, if it doesn't exist.   
+                          });
+                        const downloadreq = await downloader.download()
+                            await extract(path.join(path.join(options["Location"], "Keycat"), binaryname), { dir: path.join(options["Location"], "Keycat") })
+                            sendlog("Downloaded and unzipped keycat");
+                            CreateInstall(path.join(options["Location"], "Keycat"), "Installed")
+                            sendlog("Installation Successful.");
+                            completeinstall()
+                        
+                        
                     }
                 });
             }

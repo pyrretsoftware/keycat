@@ -5,7 +5,7 @@ const IPC = require('./Helpers/IPC.js')
 const AppDataHandler = require('./Helpers/AppdataHandler.js')
 const Installer = require('./Installer/InstallerWindow.js')
 
-if (AppDataHandler.CheckInstall(__dirname)) {
+if (AppDataHandler.CheckBarelyFunctionalInstall(__dirname)) {
   const createWindow = () => {
     const win = new BrowserWindow({
       width: 1200,
