@@ -1,4 +1,4 @@
-const { app, BrowserWindow, } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
 const path = require('node:path')
 const fetch = require('node-fetch')
 const { RegisterRPC } = require('../Helpers/IPC')
@@ -22,7 +22,9 @@ let CurrentInstallationStage = 0
           preload: __dirname + '/Preload.js'
         }
       })
-      win.setResizable(true)
+      win.setMenuBarVisibility(null)
+      Menu.setApplicationMenu(null)
+      win.setResizable(false)
       win.loadFile("./Installer/index.html")
       win.webContents.on('did-finish-load', function() {
         if (CurrentInstallationStage == 0) {

@@ -4,8 +4,10 @@ const fetch = require('node-fetch')
 const IPC = require('./Helpers/IPC.js')
 const AppDataHandler = require('./Helpers/AppdataHandler.js')
 const Installer = require('./Installer/InstallerWindow.js')
+const fs = require('fs')
 
-if (AppDataHandler.CheckBarelyFunctionalInstall(__dirname)) {
+console.log("checking location " + __dirname)
+if (fs.existsSync(__dirname + "/Settings.json")) {
   const createWindow = () => {
     const win = new BrowserWindow({
       width: 1200,
