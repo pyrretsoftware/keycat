@@ -5,9 +5,11 @@ const path = require('path');
 const extract = require('extract-zip');
 const { CreateInstall } = require('./AppdataHandler');
 const Downloader = require("nodejs-file-downloader");
+const { shell } = require('electron');
 
-async function DownloadRelease(sendlog, options, completeinstall) {
-    //Figure out platform
+async function DownloadRelease(sendlog, options, completeinstall, showerror) {
+    if (!fs.existsSync(options["Location"] + "/Keycat")) {
+            //Figure out platform
     process.noAsar = true; 
     let PlatformInfo = {
         "Searchname" : "Unknown",
@@ -77,15 +79,26 @@ async function DownloadRelease(sendlog, options, completeinstall) {
                         const downloadreq = await downloader.download()
                             await extract(path.join(path.join(options["Location"], "Keycat"), binaryname), { dir: path.join(options["Location"], "Keycat") })
                             sendlog("Downloaded and unzipped keycat");
-                            CreateInstall(path.join(options["Location"], "Keycat"), "Installed")
+                            CreateInstall(path.join(options["Location"], "Keycat"), "Installed");
+                            if (PlatformInfo["SearchName"] == "win32") {
+                                fs.mkdirSync(path.join(process.env.APPDATA, ["Microsoft", "Windows", "Start Menu", "Programs", "Keycat"]))
+                                shell.writeShortcutLink(path.join(process.env.APPDATA, ["Microsoft", "Windows", "Start Menu", "Programs", "Keycat", "Keycat Game Client.lnk"]), {
+                                    target : path.join(options["Location"], ["Keycat", "keycat-client.exe"]), 
+                                    cwd : path.join(options["Location"], "Keycat"),
+                                    description : "Key based rhythm game"
+                                })
+                            }
                             sendlog("Installation Successful.");
                             completeinstall()
-                        
+        
                         
                     }
                 });
             }
         });
+    }
+    } else {
+        showerror("Keycat is already installed.")
     }
 }
 module.exports = {DownloadRelease}

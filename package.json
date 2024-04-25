@@ -1,6 +1,6 @@
 {
   "name": "keycat-client",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "keycat client",
   "main": "main.js",
   "scripts": {

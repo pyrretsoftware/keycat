@@ -6,8 +6,8 @@ const AppDataHandler = require('./Helpers/AppdataHandler.js')
 const Installer = require('./Installer/InstallerWindow.js')
 const fs = require('fs')
 
-console.log("checking location " + __dirname)
-if (fs.existsSync(__dirname + "/Settings.json")) {
+console.log("checking location " + app.getAppPath())
+if (AppDataHandler.CheckBarelyFunctionalInstall(app.getAppPath())) {
   const createWindow = () => {
     const win = new BrowserWindow({
       width: 1200,

@@ -62,7 +62,7 @@ let CurrentInstallationStage = 0
           }
           win.loadFile("./Installer/installing.html")
           win.webContents.on('did-finish-load', function() {
-            DownloadRelease(sendlog, InstallOptions, completeinstall)
+            DownloadRelease(sendlog, InstallOptions, completeinstall, showerror)
           })
         }
           return true
@@ -74,6 +74,9 @@ let CurrentInstallationStage = 0
       }
       function completeinstall() {
         win.webContents.executeJavaScript("alert('Installation Finished'); window.electronAPI.Exit();");
+      }
+      function showerror(error) {
+        win.webContents.executeJavaScript("alert('" + error  + "'); window.electronAPI.Exit();");
       }
 }
 module.exports = {StartInstaller}
