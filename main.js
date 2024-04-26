@@ -7,12 +7,12 @@ const fs = require('fs')
 const unhandled = require('electron-unhandled');
 unhandled();
 
-const realdirname = __dirname.replaceAll("\\", "/").replace("resources/app.asar", "")
+let realdirname = __dirname.replaceAll("\\", "/").replace("resources/app.asar", "")
 if (process.platform === "win32") { 
   realdirname = realdirname.replaceAll("/", "\\")
 }
 console.log("checking location " + realdirname)
-if (__dirname.includes("app.asar")) {
+if (__dirname.includes("app.asar") || fs.existsSync(realdirname + "/resources")) {
   const createWindow = () => {
     const win = new BrowserWindow({
       width: 1200,
