@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu} = require('electron')
+const { app, BrowserWindow, Menu, TrayMenu, nativeImage} = require('electron')
 const path = require('node:path')
 const IPC = require('./Helpers/IPC.js')
 const AppDataHandler = require('./Helpers/AppdataHandler.js')
@@ -19,7 +19,7 @@ if (__dirname.includes("app.asar") || fs.existsSync(realdirname + "/resources"))
       height: 800,
       autoHideMenuBar: true,
       fullscreen: true,
-      icon: "keycat-logo-1000.png",
+      icon: __dirname + "/build/icon.png",
       webPreferences: {
         preload: path.join(__dirname, 'preload.js')
       }
@@ -31,6 +31,7 @@ if (__dirname.includes("app.asar") || fs.existsSync(realdirname + "/resources"))
   app.whenReady().then(() => {
     createWindow()
     IPC.OnReady()
+    
   })
 } else {
   if (process.argv[2] == "portable") {
