@@ -3,13 +3,16 @@ const path = require('node:path')
 const IPC = require('./Helpers/IPC.js')
 const AppDataHandler = require('./Helpers/AppdataHandler.js')
 const Installer = require('./Installer/InstallerWindow.js')
-
+const fs = require('fs')
 const unhandled = require('electron-unhandled');
 unhandled();
 
-
-console.log("checking location " + app.getAppPath())
-if (AppDataHandler.CheckBarelyFunctionalInstall(app.getAppPath())) {
+const realdirname = __dirname.replaceAll("\\", "/").replace("resources/app.asar", "")
+if (process.platform === "win32") { 
+  realdirname = realdirname.replaceAll("/", "\\")
+}
+console.log("checking location " + realdirname)
+if (__dirname.includes("app.asar")) {
   const createWindow = () => {
     const win = new BrowserWindow({
       width: 1200,

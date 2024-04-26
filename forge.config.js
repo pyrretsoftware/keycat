@@ -12,7 +12,10 @@ module.exports = {
     {
       "name": "@rabbitholesyndrome/electron-forge-maker-portable",
       "config": {
-        "appId": "me.axell.keycat"
+        "appId": "me.axell.keycat",
+        "portable": {
+          "artifactName": "keycat-${version}.exe"
+        }
       }
     },
     {
