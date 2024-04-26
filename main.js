@@ -1,10 +1,12 @@
 const { app, BrowserWindow, Menu} = require('electron')
 const path = require('node:path')
-const fetch = require('node-fetch')
 const IPC = require('./Helpers/IPC.js')
 const AppDataHandler = require('./Helpers/AppdataHandler.js')
 const Installer = require('./Installer/InstallerWindow.js')
-const fs = require('fs')
+
+const unhandled = require('electron-unhandled');
+unhandled();
+
 
 console.log("checking location " + app.getAppPath())
 if (AppDataHandler.CheckBarelyFunctionalInstall(app.getAppPath())) {

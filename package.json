@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "easy-presence": "^1.2.0-oops1",
+    "electron-unhandled": "^4.0.1",
     "extract-zip": "^2.0.1",
     "node-fetch": "^2.7.0",
     "nodejs-file-downloader": "^4.12.1",
