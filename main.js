@@ -5,6 +5,7 @@ const AppDataHandler = require('./Helpers/AppdataHandler.js')
 const Installer = require('./Installer/InstallerWindow.js')
 const fs = require('fs')
 const unhandled = require('electron-unhandled');
+const { UninstallFromLocation } = require('./Helpers/Uninstaller.js')
 unhandled();
 
 let realdirname = __dirname.replaceAll("\\", "/").replace("resources/app.asar", "")
@@ -38,7 +39,7 @@ if (__dirname.includes("app.asar") || fs.existsSync(realdirname + "/resources"))
     app.relaunch()
     app.exit()
   } else if (process.argv[1] == "uninstall") {
-
+    UninstallFromLocation(realdirname, true)
   } else {
     console.log("First launch: Initalizing as Installed")
     app.whenReady().then(() => {
