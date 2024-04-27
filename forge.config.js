@@ -1,10 +1,11 @@
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
+const path = require('node:path')
 
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon : '/build/icon'
+    icon : path.join(process.cwd(), 'build', 'icon')
   },
   rebuildConfig: {},
   makers: [
