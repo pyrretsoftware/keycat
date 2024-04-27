@@ -21,25 +21,40 @@ function UninstallFromLocation(Location, ConfirmWithUser) {
         dialog.showMessageBox(null, uninstalloptions, (response) => {
         if (response == 0) {
             return
+        } else {
+            if (Location.split("/")[Location.split("/") - 1] == "Keycat") {
+                if (process.platform != "win32") {
+                    spawn(`sleep 2 && rm -rf ` + Location + ` && notify-send "Uninstallation complete."`, {
+                        shell: true
+                    });
+                 } else {
+                    spawn(`timeout 2 & rmdir /s /q ` + Location + ` & echo Uninstall Complete & pause`, {
+                        shell: true
+                    });
+                 }
+            } else {
+                dialog.showMessageBox(null, erroroptions, (response) => {
+                    app.exit()
+                });
+            }
         }
         });
-    }
-    //safety checks
-
-    if (Location.split("/")[Location.split("/") - 1] == "Keycat") {
-        if (process.platform != "win32") {
-            spawn(`sleep 2 && rm -rf ` + Location + ` && notify-send "Uninstallation complete."`, {
-                shell: true
-            });
-         } else {
-            spawn(`timeout 2 & rmdir /s /q ` + Location + ` & echo Uninstall Complete & pause`, {
-                shell: true
-            });
-         }
     } else {
-        dialog.showMessageBox(null, erroroptions, (response) => {
-            app.exit()
-        });
+        if (Location.split("/")[Location.split("/") - 1] == "Keycat") {
+            if (process.platform != "win32") {
+                spawn(`sleep 2 && rm -rf ` + Location + ` && notify-send "Uninstallation complete."`, {
+                    shell: true
+                });
+             } else {
+                spawn(`timeout 2 & rmdir /s /q ` + Location + ` & echo Uninstall Complete & pause`, {
+                    shell: true
+                });
+             }
+        } else {
+            dialog.showMessageBox(null, erroroptions, (response) => {
+                app.exit()
+            });
+        }
     }
 }
 module.exports = {UninstallFromLocation}
