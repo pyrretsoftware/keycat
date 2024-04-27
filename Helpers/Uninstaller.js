@@ -18,7 +18,9 @@ const erroroptions = {
 }
 function UninstallFromLocation(Location, ConfirmWithUser) {
     if (ConfirmWithUser) {
+        console.log("showing box")
         dialog.showMessageBox(null, uninstalloptions, (response) => {
+            console.log("response is " + response)
         if (response == 0) {
             return
         } else {
@@ -41,22 +43,6 @@ function UninstallFromLocation(Location, ConfirmWithUser) {
             }
         }
         });
-    } else {
-        if (Location.split("/")[Location.split("/") - 1] == "Keycat") {
-            if (process.platform != "win32") {
-                spawn(`sleep 2 && rm -rf ` + Location + ` && notify-send "Uninstallation complete."`, {
-                    shell: true
-                });
-             } else {
-                spawn(`timeout 2 & rmdir /s /q ` + Location + ` & echo Uninstall Complete & pause`, {
-                    shell: true
-                });
-             }
-        } else {
-            dialog.showMessageBox(null, erroroptions, (response) => {
-                app.exit()
-            });
-        }
     }
 }
 module.exports = {UninstallFromLocation}

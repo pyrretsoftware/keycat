@@ -9,6 +9,7 @@ const { UninstallFromLocation } = require('./Helpers/Uninstaller.js')
 unhandled();
 
 let realdirname = __dirname.replaceAll("\\", "/").replace("resources/app.asar", "")
+console.log(realdirname)
 if (process.platform === "win32") { 
   realdirname = realdirname.replaceAll("/", "\\")
 }
@@ -22,30 +23,30 @@ if (process.platform === "win32") {
     app.relaunch()
     app.exit()
   } else {
-  if (__dirname.includes("app.asar") || fs.existsSync(realdirname + "/resources")) {
-    const createWindow = () => {
-      const win = new BrowserWindow({
-        width: 1200,
-        height: 800,
-        autoHideMenuBar: true,
-        fullscreen: true,
-        icon: __dirname + "/build/icon.png",
-        webPreferences: {
-          preload: path.join(__dirname, 'preload.js')
-        }
+    if (!process.env.PORTABLE_EXECUTABLE_FILE) {
+      const createWindow = () => {
+        const win = new BrowserWindow({
+          width: 1200,
+          height: 800,
+          autoHideMenuBar: true,
+          fullscreen: true,
+          icon: __dirname + "/build/icon.png",
+          webPreferences: {
+            preload: path.join(__dirname, 'preload.js')
+          }
+        })
+        win.loadURL('http://localhost:3000')
+        win.setMenuBarVisibility(null)
+        Menu.setApplicationMenu(null)
+      }
+      app.whenReady().then(() => {
+        createWindow()
+        IPC.OnReady()
       })
-      win.loadURL('http://localhost:3000')
-      win.setMenuBarVisibility(null)
-      Menu.setApplicationMenu(null)
+    } else {
+      console.log("First launch: Initalizing as Installed")
+      app.whenReady().then(() => {
+        Installer.StartInstaller()
+      })
     }
-    app.whenReady().then(() => {
-      createWindow()
-      IPC.OnReady()
-    })
-  } else {
-    console.log("First launch: Initalizing as Installed")
-    app.whenReady().then(() => {
-      Installer.StartInstaller()
-    })
-  }
 }
