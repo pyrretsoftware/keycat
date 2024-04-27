@@ -24,10 +24,12 @@ function UninstallFromLocation(Location, ConfirmWithUser) {
         } else {
             if (Location.split("/")[Location.split("/") - 1] == "Keycat") {
                 if (process.platform != "win32") {
+                    console.log("uninstalling")
                     spawn(`sleep 2 && rm -rf ` + Location + ` && notify-send "Uninstallation complete."`, {
                         shell: true
                     });
                  } else {
+                    console.log("uninstalling")
                     spawn(`timeout 2 & rmdir /s /q ` + Location + ` & echo Uninstall Complete & pause`, {
                         shell: true
                     });
