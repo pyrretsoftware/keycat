@@ -70,10 +70,11 @@ let CurrentInstallationStage = 0
 
       function sendlog(log) {
         win.webContents.send('send-log', log)
-        win.webContents.executeJavaScript("document.getElementById('progressbar').value += 12.5");
+        win.webContents.executeJavaScript("document.getElementById('progressbar').value += 14.28");
       }
       function completeinstall() {
         win.webContents.executeJavaScript("alert('Installation Finished'); window.electronAPI.Exit();");
+        win.webContents.executeJavaScript("document.getElementById('progressbar').value = 100s;");
       }
       function showerror(error) {
         win.webContents.executeJavaScript("alert('" + error  + "'); window.electronAPI.Exit();");

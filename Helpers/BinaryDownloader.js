@@ -60,7 +60,7 @@ async function DownloadRelease(sendlog, options, completeinstall, showerror) {
                 if (options["BinaryType"] == "Zip") {
                     
                 } else {
-                    sendlog("FATAL: Binary types other than zip are not supported anymore due to performance and compatibility issues");
+                    showerror("FATAL: Binary types other than zip are not supported anymore due to performance and compatibility issues");
                     throw new Error("FATAL: Binary types other than zip are not supported anymore due to performance and compatibility issues")
                 }
                 let loopbreak2 = true
