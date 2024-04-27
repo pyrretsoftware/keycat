@@ -31,7 +31,6 @@ if (__dirname.includes("app.asar") || fs.existsSync(realdirname + "/resources"))
   app.whenReady().then(() => {
     createWindow()
     IPC.OnReady()
-    
   })
 } else {
   if (process.argv[2] == "portable") {
