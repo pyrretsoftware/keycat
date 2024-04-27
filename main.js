@@ -11,7 +11,6 @@ let realdirname = __dirname.replaceAll("\\", "/").replace("resources/app.asar", 
 if (process.platform === "win32") { 
   realdirname = realdirname.replaceAll("/", "\\")
 }
-console.log("checking location " + realdirname)
 if (__dirname.includes("app.asar") || fs.existsSync(realdirname + "/resources")) {
   const createWindow = () => {
     const win = new BrowserWindow({
@@ -33,13 +32,15 @@ if (__dirname.includes("app.asar") || fs.existsSync(realdirname + "/resources"))
     IPC.OnReady()
   })
 } else {
-  if (process.argv[2] == "portable") {
-    console.log("Firt launch: Initalizing as portable")
+  if (process.argv[1] == "portable") {
+    console.log("First launch: Initalizing as portable")
     AppDataHandler.CreateInstall(__dirname, "Portable")
     app.relaunch()
     app.exit()
+  } else if (process.argv[1] == "uninstall") {
+
   } else {
-    console.log("Firt launch: Initalizing as Installed")
+    console.log("First launch: Initalizing as Installed")
     app.whenReady().then(() => {
       Installer.StartInstaller()
     })
