@@ -80,10 +80,10 @@ async function DownloadRelease(sendlog, options, completeinstall, showerror) {
                             await extract(path.join(path.join(options["Location"], "Keycat"), binaryname), { dir: path.join(options["Location"], "Keycat") })
                             sendlog("Downloaded and unzipped keycat");
                             CreateInstall(path.join(options["Location"], "Keycat"), "Installed");
-                            if (PlatformInfo["SearchName"] == "win32") {
-                                fs.mkdirSync(path.join(process.env.APPDATA, ["Microsoft", "Windows", "Start Menu", "Programs", "Keycat"]))
-                                shell.writeShortcutLink(path.join(process.env.APPDATA, ["Microsoft", "Windows", "Start Menu", "Programs", "Keycat", "Keycat Game Client.lnk"]), {
-                                    target : path.join(options["Location"], ["Keycat", "keycat-client.exe"]), 
+                            if (process.platform == "win32") {
+                                fs.mkdirSync(process.env.APPDATA.replaceAll("\\", "/") + "/Microsoft/Windows/Start Menu/Programs/Keycat")
+                                shell.writeShortcutLink(process.env.APPDATA.replaceAll("\\", "/") + "/Microsoft/Windows/Start Menu/Programs/Keycat/Keycat.lnk", {
+                                    target : options["Location"] + "/Keycat/keycat-client.exe", 
                                     cwd : path.join(options["Location"], "Keycat"),
                                     description : "Key based rhythm game"
                                 })
