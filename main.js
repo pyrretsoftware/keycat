@@ -13,7 +13,9 @@ if (process.platform === "win32") {
   realdirname = realdirname.replaceAll("/", "\\")
 }
 if (process.argv[1] == "uninstall") {
-  UninstallFromLocation(realdirname, true)
+  app.whenReady().then(() => {
+    UninstallFromLocation(realdirname, true)
+  })
 } else {
   if (__dirname.includes("app.asar") || fs.existsSync(realdirname + "/resources")) {
     const createWindow = () => {
