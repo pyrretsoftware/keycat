@@ -6,6 +6,7 @@ const Installer = require('./Installer/InstallerWindow.js')
 const fs = require('fs')
 const unhandled = require('electron-unhandled');
 const { UninstallFromLocation } = require('./Helpers/Uninstaller.js')
+const Settings = require('./Helpers/ReadSettings.js')
 unhandled();
 
 let realdirname = __dirname.replaceAll("\\", "/").replace("resources/app.asar", "")
@@ -23,7 +24,7 @@ if (process.platform === "win32") {
     app.relaunch()
     app.exit()
   } else {
-    if (!process.env.PORTABLE_EXECUTABLE_FILE) {
+    if (!process.env.PORTABLE_EXECUTABLE_FILE && process.argv[1] == "installer") { //TODO: add anotherr check for linux once we start providing linux binaries.
       const createWindow = () => {
         const win = new BrowserWindow({
           width: 1200,
@@ -35,7 +36,11 @@ if (process.platform === "win32") {
             preload: path.join(__dirname, 'preload.js')
           }
         })
-        win.loadURL('http://localhost:3000')
+        if (Settings.Settings["DevMode"]) {
+          win.loadURL('http://localhost:3000')
+        } else {
+          win.loadURL('https://keycat.vercel.app')
+        }
         win.setMenuBarVisibility(null)
         Menu.setApplicationMenu(null)
       }
