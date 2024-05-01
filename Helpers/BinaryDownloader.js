@@ -47,6 +47,10 @@ async function DownloadRelease(sendlog, options, completeinstall, showerror) {
         allreleases = await allreleases.json()
         let loopbreak = true;
 
+        if (allreleases["message"]) {
+            showerror("You have been ratelimited by GitHub. Please try again later.")
+        }
+
         sendlog("Searching through releases for " + options["Release"])
         allreleases.forEach(release => {
             if (release["name"] == options["Release"] && loopbreak) {
