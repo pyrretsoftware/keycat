@@ -19,12 +19,11 @@ const erroroptions = {
 function UninstallFromLocation(Location, ConfirmWithUser) {
     if (ConfirmWithUser) {
         console.log("showing box")
-        dialog.showMessageBox(null, uninstalloptions, (response) => {
+        dialog.showMessageBox(null, uninstalloptions, result => {
             console.log("response is " + response)
-        if (response == 0) {
+        if (result.response == 0) {
             return
         } else {
-            if (Location.split("/")[Location.split("/") - 1] == "Keycat") {
                 if (process.platform != "win32") {
                     console.log("uninstalling")
                     spawn(`sleep 2 && rm -rf ` + Location + ` && notify-send "Uninstallation complete."`, {
@@ -36,11 +35,7 @@ function UninstallFromLocation(Location, ConfirmWithUser) {
                         shell: true
                     });
                  }
-            } else {
-                dialog.showMessageBox(null, erroroptions, (response) => {
-                    app.exit()
-                });
-            }
+                 app.exit();
         }
         });
     }
