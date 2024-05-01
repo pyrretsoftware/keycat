@@ -6,7 +6,7 @@ const Installer = require('./Installer/InstallerWindow.js')
 const fs = require('fs')
 const unhandled = require('electron-unhandled');
 const { UninstallFromLocation } = require('./Helpers/Uninstaller.js')
-const Settings = require('./Helpers/ReadSettings.js')
+const { Settings  }= require('./Helpers/ReadSettings.js')
 unhandled();
 
 let realdirname = __dirname.replaceAll("\\", "/").replace("resources/app.asar", "")
@@ -30,13 +30,13 @@ if (process.platform === "win32") {
           width: 1200,
           height: 800,
           autoHideMenuBar: true,
-          fullscreen: true,
+          fullscreen: Settings["FullscreenOnStartup"],
           icon: __dirname + "/build/icon.png",
           webPreferences: {
             preload: path.join(__dirname, 'preload.js')
           }
         })
-        if (Settings.Settings["DevMode"]) {
+        if (Settings["DevMode"]) {
           win.loadURL('http://localhost:3000')
         } else {
           win.loadURL('https://keycat.vercel.app')
