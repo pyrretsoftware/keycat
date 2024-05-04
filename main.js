@@ -24,7 +24,7 @@ if (process.platform === "win32") {
     app.relaunch()
     app.exit()
   } else {
-    if (!process.env.PORTABLE_EXECUTABLE_FILE && process.argv[1] == "installer") { //TODO: add anotherr check for linux once we start providing linux binaries.
+    if (!process.env.PORTABLE_EXECUTABLE_FILE && process.argv[1] != "installer") { //TODO: add anotherr check for linux once we start providing linux binaries.
       const createWindow = () => {
         const win = new BrowserWindow({
           width: 1200,
