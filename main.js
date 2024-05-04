@@ -33,7 +33,8 @@ if (process.platform === "win32") {
           fullscreen: Settings["FullscreenOnStartup"],
           icon: __dirname + "/build/icon.png",
           webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, 'preload.js'),
+            webSecurity: false
           }
         })
         if (Settings["DevMode"]) {
