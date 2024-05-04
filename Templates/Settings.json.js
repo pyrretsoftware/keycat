@@ -4,5 +4,6 @@ module.exports =
     "FullscreenOnStartup" : true,
     "DiscordRPCEnabled" : true,
     "RememberLogin" : true,
-    "DeleteBeatmapFilesWhenUnpacked" : true
+    "DeleteBeatmapFilesWhenUnpacked" : true,
+    "DevMode" : false
 }

@@ -47,6 +47,10 @@ async function DownloadRelease(sendlog, options, completeinstall, showerror) {
         allreleases = await allreleases.json()
         let loopbreak = true;
 
+        if (allreleases["message"]) {
+            showerror("You have been ratelimited by GitHub. Please try again later.")
+        }
+
         sendlog("Searching through releases for " + options["Release"])
         allreleases.forEach(release => {
             if (release["name"] == options["Release"] && loopbreak) {
@@ -60,7 +64,7 @@ async function DownloadRelease(sendlog, options, completeinstall, showerror) {
                 if (options["BinaryType"] == "Zip") {
                     
                 } else {
-                    sendlog("FATAL: Binary types other than zip are not supported anymore due to performance and compatibility issues");
+                    showerror("FATAL: Binary types other than zip are not supported anymore due to performance and compatibility issues");
                     throw new Error("FATAL: Binary types other than zip are not supported anymore due to performance and compatibility issues")
                 }
                 let loopbreak2 = true
