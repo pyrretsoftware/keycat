@@ -1,0 +1,48 @@
+{
+    "info" : "Keycat map file format",
+    "audio" : "https://cd.axell.me/p/keycat_music/take-a-hint.mp3",
+    "metadata" : {
+        "title" : "Take a Hint (Sped up)",
+        "artist" : "Victorious Cast",
+        "album" : "N/A",
+        "coverimage" : "https://cd.axell.me/p/keycat_title/albumcover-na.png",
+        "mapper" : "axell",
+        "mapperlink" : "https://axell.me"
+    },
+    "difficulties" : {
+        "Easy" : {
+            "timings" : [
+                12.04,
+                0.955,
+                1.548, 
+                1.335, 
+                1.468, 
+                1.535, 
+                1.468, 
+                1.094, 
+                1.475, 
+                0.7,
+                1.201, 
+                1.501, 
+                1.335, 
+                1.535, 
+                1.468, 
+                1.702, 
+                2.536, 
+                0.467, 
+                1.668, 
+                1.602, 
+                1.067, 
+                0.501, 
+                1.435, 
+                1.401, 
+                1.435, 
+                1.401, 
+                2.336, 
+                3.203, 
+                1.502
+              ],
+              "text" : "-[ -- ]-\noi oi oi\nuo uo uo\nol ol ol\nul ul ul\nok ok ol\nuk uk uk\nio io io\nol ol ol\nop op op\nil il il\nik ik ik\nij ij ij\niu iu iu\noi oi oi\nol ol ol\noi oi oi\n-[ oh ]-\nou ou ou\nop op op\noi oi oi\n-[ ay ]-\noi oi --\nil il il\nop op --\nil il il\noi oi --\noi oi --\n-[ -- ]-"
+        }
+    }
+}

@@ -74,7 +74,7 @@ let CurrentInstallationStage = 0
       }
       function completeinstall() {
         win.webContents.executeJavaScript("alert('Installation Finished'); window.electronAPI.Exit();");
-        win.webContents.executeJavaScript("document.getElementById('progressbar').value = 100s;");
+        win.webContents.executeJavaScript("document.getElementById('progressbar').value = 100;");
       }
       function showerror(error) {
         win.webContents.executeJavaScript("alert('" + error  + "'); window.electronAPI.Exit();");
