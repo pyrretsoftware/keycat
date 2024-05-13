@@ -7,6 +7,7 @@ const fs = require('fs')
 const unhandled = require('electron-unhandled');
 const { UninstallFromLocation } = require('./Helpers/Uninstaller.js')
 const { Settings  }= require('./Helpers/ReadSettings.js')
+const { LoadMapsFromDirectory} = require('./Helpers/MapLoader.js')
 unhandled();
 
 let realdirname = __dirname.replaceAll("\\", "/").replace("resources/app.asar", "")
@@ -31,23 +32,25 @@ if (process.platform === "win32") {
           height: 800,
           autoHideMenuBar: true,
           fullscreen: Settings["FullscreenOnStartup"],
-          icon: __dirname + "/build/icon.png",
+          icon: __dirname + "/build/icon.png",    
           webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
-            webSecurity: false
+            webSecurity: false,
+            nodeIntegration: true,
           }
         })
         if (Settings["DevMode"]) {
           win.loadURL('http://localhost:3000')
         } else {
           win.loadURL('https://keycat.vercel.app')
+          win.setMenuBarVisibility(null)
+          Menu.setApplicationMenu(null)
         }
-        win.setMenuBarVisibility(null)
-        Menu.setApplicationMenu(null)
       }
       app.whenReady().then(() => {
         createWindow()
-        IPC.OnReady()
+        IPC.OnReady(path.join(realdirname, "Songs"))
+        console.log(LoadMapsFromDirectory())
       })
     } else {
       console.log("First launch: Initalizing as Installed")
