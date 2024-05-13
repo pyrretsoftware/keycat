@@ -31,6 +31,7 @@ function difficultyToKaiogff(mapfile, difficulty) {
     return  {
         "info" : "Keycat All-in-one gameplay file format (KAIOGFF)",
         "audio" : mapfile["audio"],
+        "audiolocation" : mapfile["audiolocation"],
         "metadata" : mapfile["metadata"],
         "timings" : mapfile["difficulties"][difficulty]["timings"],
         "text" : mapfile["difficulties"][difficulty]["text"],

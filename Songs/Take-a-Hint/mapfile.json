@@ -1,6 +1,7 @@
 {
     "info" : "Keycat map file format",
     "audio" : "https://cd.axell.me/p/keycat_music/take-a-hint.mp3",
+    "audiolocation" : 35,
     "metadata" : {
         "title" : "Take a Hint (Sped up)",
         "artist" : "Victorious Cast",
