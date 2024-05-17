@@ -1,1 +1,1 @@
-{"DevMode" : true, "Type":"Installed","FullscreenOnStartup":false,"DiscordRPCEnabled":true,"RememberLogin":true,"DeleteBeatmapFilesWhenUnpacked":true}
+{"DevMode" : true, "DevModeLoadFromLocal" : true, "Type":"Installed","FullscreenOnStartup":false,"DiscordRPCEnabled":true,"RememberLogin":true,"DeleteBeatmapFilesWhenUnpacked":true}

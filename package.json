@@ -1,6 +1,6 @@
 {
   "name": "keycat-client",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "keycat client",
   "main": "main.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron/fuses": "^1.8.0",
     "@rabbitholesyndrome/electron-forge-maker-portable": "^0.2.0",
-    "electron": "^29.3.0"
+    "electron": "^29.3.3"
   },
   "dependencies": {
     "easy-presence": "^1.2.0-oops1",

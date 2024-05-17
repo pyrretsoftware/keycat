@@ -5,5 +5,6 @@ module.exports =
     "DiscordRPCEnabled" : true,
     "RememberLogin" : true,
     "DeleteBeatmapFilesWhenUnpacked" : true,
-    "DevMode" : false
+    "DevMode" : false,
+    "DevModeLoadFromLocal" : false
 }
