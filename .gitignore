@@ -2,4 +2,5 @@ node_modules
 out
 launch.json
 Settings.json
-songs
+Songs
+SongsExtractionTemp
