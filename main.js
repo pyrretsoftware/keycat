@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, TrayMenu, nativeImage} = require('electron')
+const { app, BrowserWindow, Menu, TrayMenu, nativeImage, ipcMain} = require('electron')
 const path = require('node:path')
 const IPC = require('./Helpers/IPC.js')
 const AppDataHandler = require('./Helpers/AppdataHandler.js')
@@ -26,9 +26,9 @@ if (process.platform === "win32") {
     app.exit()
   } else {
     if (!process.env.PORTABLE_EXECUTABLE_FILE && process.argv[1] != "installer") { //TODO: add anotherr check for linux once we start providing linux binaries.
-
+      var win
       const createWindow = () => {
-        const win = new BrowserWindow({
+        win = new BrowserWindow({
           width: 1200,
           height: 800,
           autoHideMenuBar: true,
@@ -53,6 +53,23 @@ if (process.platform === "win32") {
       app.whenReady().then(() => {
         createWindow()
         IPC.OnReady(path.join(realdirname, "Songs"))
+
+        ipcMain.handle('editor:open',  function() {
+          win.loadFile(__dirname + "/Editor/index.html")
+        })
+
+        
+        ipcMain.handle('editor:quit',  function() {
+          if (Settings["DevModeLoadFromLocal"]) {
+            win.loadURL('http://localhost:3000')
+          } else {
+            win.loadURL('https://keycat.vercel.app')
+            if (!Settings["DevMode"]) {
+              win.setMenuBarVisibility(null)
+              Menu.setApplicationMenu(null)
+            }
+          }
+        })
         console.log(LoadMapsFromDirectory())
       })
     } else {
