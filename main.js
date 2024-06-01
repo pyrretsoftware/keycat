@@ -43,7 +43,7 @@ if (process.platform === "win32") {
         if (Settings["DevModeLoadFromLocal"]) {
           win.loadURL('http://localhost:3000')
         } else {
-          win.loadURL('https://keycat.vercel.app')
+          win.loadURL('https://' + Settings["Channel"] +'.keycat.deployments.axell.me/')
           if (!Settings["DevMode"]) {
             win.setMenuBarVisibility(null)
             Menu.setApplicationMenu(null)

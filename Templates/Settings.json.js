@@ -6,5 +6,6 @@ module.exports =
     "RememberLogin" : true,
     "DeleteBeatmapFilesWhenUnpacked" : true,
     "DevMode" : false,
-    "DevModeLoadFromLocal" : false
+    "DevModeLoadFromLocal" : false,
+    "Channel" : "stable"
 }
