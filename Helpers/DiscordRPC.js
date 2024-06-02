@@ -60,10 +60,10 @@ function ChangeRPC(state) {
             timestamps: { start: StartTime }
         });
     } 
+    client.on("connected", () => {
+        ChangeRPC({
+            "state" : "starting"
+        })
+    });
 }
-client.on("connected", () => {
-    ChangeRPC({
-        "state" : "starting"
-    })
-});
 module.exports = {ChangeRPC}
