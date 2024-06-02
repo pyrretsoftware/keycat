@@ -19,8 +19,8 @@ ipcMain.on('browser-login', async () => {
     var start = (process.platform == 'darwin'? 'open': process.platform == 'win32'? 'start': 'xdg-open');
     require('child_process').exec(start + ' ' + website)
   })
-  ipcMain.on('report-state', (event, state) => {
-    ChangeRPC(state)
+  ipcMain.on('report-state', (event, state, user) => {
+    ChangeRPC(state, user)
   })
 
 module.exports = {
