@@ -1,6 +1,5 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
-const http = require('https');
 const path = require('path');
 const extract = require('extract-zip');
 const { CreateInstall } = require('./AppdataHandler');
@@ -84,7 +83,7 @@ async function DownloadRelease(sendlog, options, completeinstall, showerror) {
                             await extract(path.join(path.join(options["Location"], "Keycat"), binaryname), { dir: path.join(options["Location"], "Keycat") })
                             sendlog("Downloaded and unzipped keycat");
                             CreateInstall(path.join(options["Location"], "Keycat"), "Installed");
-                            if (process.platform == "win32") {
+                            if (process.platform == "win32" && !fs.existsSync(process.env.APPDATA.replaceAll("\\", "/") + "/Microsoft/Windows/Start Menu/Programs/Keycat")) {
                                 fs.mkdirSync(process.env.APPDATA.replaceAll("\\", "/") + "/Microsoft/Windows/Start Menu/Programs/Keycat")
                                 shell.writeShortcutLink(process.env.APPDATA.replaceAll("\\", "/") + "/Microsoft/Windows/Start Menu/Programs/Keycat/Keycat.lnk", {
                                     target : options["Location"] + "/Keycat/keycat-client.exe", 

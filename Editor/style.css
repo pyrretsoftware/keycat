@@ -1,0 +1,123 @@
+.mb-select {
+  appearance: none;
+  border-radius: 2px;
+  background-color: rgb(20, 20, 20);
+  color: white;
+  border: none;
+  text-decoration: underline;
+  font-size: medium;
+}
+.mb-label {
+  display: none;
+}
+
+.topbar {
+  z-index: 50;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+.bottombar {
+  position: fixed;
+  bottom: 0;
+  z-index: 50;
+  width: 100%;
+  background-color: rgb(30, 30, 30);
+}
+.musicbar {
+  width: 90%;
+}
+.playbutton {
+  width: ;
+}
+body {
+  margin: 0;
+  background-color: rgb(20, 20, 20);
+  height: 100%;
+  width: 100%;
+}
+.editorpopup {
+  width: max-content;
+  height: max-content;
+  background-color: rgb(30, 30, 30);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 21px;
+  z-index: 1000;
+}
+.editingbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.ptext {
+  margin: 1px;
+  font-family: 'Inter'; 
+  font-weight: 600;
+  font-size: xx-large;
+  font-style: normal;
+  color: white;
+  background-color: transparent;
+  width: max-content;
+  text-align: center;
+  border: 0;
+}
+.ptext:focus {
+  outline: none;
+}
+.submit {
+  background-color: rgb(50, 50, 50);
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  border: 0;
+  border-radius: 3px;
+  font-size: large;
+  margin-top: 5px;
+  position: static;
+}
+.submit:hover {
+  outline: solid white;
+}
+.submitcontainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+.epfield {
+  display: flex;
+  flex-direction: row;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+.editorpopupcontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0;
+  position: fixed;
+  backdrop-filter: blur(3px);
+}
+h1, h2, h3, p {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+}

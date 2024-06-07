@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>keycat editor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div style="display: none;" class="editorpopupcontainer">
+        <div class="editorpopup">
+            <h1 style="text-align: center; margin-bottom: 8px; margin-top: 0px; width: 100%;">Title</h1>
+            <div class="epfield">
+                <h3 style="margin-top: 1px; margin-bottom: 1px; margin-right: 7px;">Name: </h3>
+                <input type="text">
+            </div>
+        </div>
+        <div class="submitcontainer">
+            <button class="submit">Enter</button>
+        </div>
+    </div>
+    <header class="topbar">
+        <select class="mb-select" name="" id="mb-file">
+            <option class="mb-label" value="mb-label">File</option>
+            <option value="file-new">New</option>
+            <option value="file-open">Open</option>
+            <option value="file-save">Save</option>
+            <option value="file-export">Export</option>
+            <option value="file-exit">Quit</option>
+        </select>
+        <select style="margin-right: -50px;" class="mb-select" name="" id="mb-meta">
+            <option class="mb-label" value="mb-label">Metadata</option>
+            <option value="meta-edit">Edit</option>
+            <option value="meta-editres">Edit resources</option>
+            <option value="meta-openmapdir">Open map directory</option>
+        </select>
+        <select class="mb-select" name="" id="mb-mapping">
+            <option class="mb-label" value="mb-label">Mapping</option>
+            <option value="meta-edit">Add line</option>
+        </select>
+
+        <p id="unsavedchanges" style="margin-top: 0; margin-bottom: 0; margin-left: 10%; display: none;">You have 0 unsaved changes</p>
+    </header>
+    <div class="editingbar">
+        <input maxlength="8" disabled class="ptext" placeholder="-- -- --" type="text" name="" id="ptext1">
+        <input maxlength="8" class="ptext" placeholder="-- -- --" type="text" name="" id="ptext2">
+        <input maxlength="8" disabled class="ptext" placeholder="-- -- --" type="text" name="" id="ptext3">
+
+    </div>
+    <footer class="bottombar">
+        <input class="musicbar" type="range" name="" id="">
+        <button class="playbutton" >Play</button>
+    </footer>
+</body>
+<script src="mb.js"></script>
+<script src="popupcreator.js"></script>
+<script src="workingchanges.js"></script>
+<script src="editor.js"></script>
+
+</html>
